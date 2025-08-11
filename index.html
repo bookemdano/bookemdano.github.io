@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dan Francis - Software Engineering Leader</title>
+  <!-- React via CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <style>
+    /* Basic reset and typography */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f6f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    /* Header styling */
+    .header {
+      background-color: #f0f0f0;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2.4em;
+      letter-spacing: 1px;
+    }
+    .header p {
+      margin-top: 10px;
+      color: #777;
+      font-size: 1.1em;
+    }
+    /* Layout and sections */
+    .content {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+    .section {
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .section:last-child {
+      border-bottom: none;
+    }
+    .section h2 {
+      margin-top: 0;
+      font-size: 1.8em;
+      color: #222;
+    }
+    /* Photo placeholder */
+    .photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 75px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 20px auto;
+      background-color: #ccc;
+    }
+    /* Lists styling */
+    ul {
+      margin-top: 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    /* Links */
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .header {
+        padding: 30px 10px;
+      }
+      .header h1 {
+        font-size: 1.8em;
+      }
+      .section h2 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const App = () => (
+      React.createElement(React.Fragment, null,
+        React.createElement('header', { className: 'header' },
+          React.createElement('h1', null, 'Dan Francis'),
+          React.createElement('p', null, 'Software Engineering Leader — C#, .NET, Cloud & Agile Specialist')
+        ),
+        React.createElement('main', { className: 'content' },
+          /* Photo section */
+          React.createElement('section', { className: 'section', id: 'photo' },
+            React.createElement('img', { className: 'photo', src: 'placeholder.png', alt: 'Dan Francis portrait' })
+          ),
+          /* About section */
+          React.createElement('section', { className: 'section', id: 'about' },
+            React.createElement('h2', null, 'About Me'),
+            React.createElement('p', null,
+              'I’m a software engineering leader with over 20 years of experience building and scaling SaaS and enterprise platforms. ' +
+              'I have deep expertise in C#, .NET, and multi-tier architecture, with a track record of hands-on development and technical leadership. ' +
+              'I’ve scaled systems to 20× usage, integrated cloud services (AWS, Azure), and led Agile engineering teams delivering high-impact solutions around the world.'
+            )
+          ),
+          /* Experience section */
+          React.createElement('section', { className: 'section', id: 'experience' },
+            React.createElement('h2', null, 'Professional Experience'),
+            React.createElement('ul', null,
+              React.createElement('li', null,
+                React.createElement('strong', null, 'Johns Hopkins University — Engineering Manager'), React.createElement('br'),
+                React.createElement('em', null, 'March 2022 – present'), React.createElement('br'),
+                'Lead delivery of scalable SaaS and enterprise solutions, integrating AWS and Azure services and managing high-performing Agile teams.'
+              ),
+              React.createElement('li', null,
+                React.createElement('strong', null, 'DevFirst.net — Full-Stack Developer'), React.createElement('br'),
+                React.createElement('em', null, 'Apr 2021 – Mar 2022'), React.createElement('br'),
+                'Developed web tools using React and .NET for clients including Johns Hopkins Health Care and advised on processes and operations.'
+              ),
+              React.createElement('li', null,
+                React.createElement('strong', null, 'SchoolPass — VP of Engineering/Product & Development'), React.createElement('br'),
+                React.createElement('em', null, 'Jan 2018 – Apr 2021'), React.createElement('br'),
+                'Oversaw technology for dismissal, visitor management and wellness software, leading contractors and internal teams to grow product usage.'
+              ),
+              React.createElement('li', null,
+                React.createElement('strong', null, 'Omnitracs / Roadnet / UPS Logistics — Various Leadership Roles'), React.createElement('br'),
+                React.createElement('em', null, 'Nov 1999 – Jan 2018'), React.createElement('br'),
+                'Led mobile software teams, trained developers on SAFe and Agile practices, modernized applications and collaborated across locations.'
+              ),
+              React.createElement('li', null,
+                React.createElement('strong', null, 'Additional Experience'), React.createElement('br'),
+                'Technical editor for software development publications and software lead for inflight duty-free sales systems.'
+              )
+            )
+          ),
+          /* Education & Certifications */
+          React.createElement('section', { className: 'section', id: 'education' },
+            React.createElement('h2', null, 'Education & Certifications'),
+            React.createElement('ul', null,
+              React.createElement('li', null, React.createElement('strong', null, 'MS, Software Engineering'), ', WVU, 2023 – GPA 4.0'),
+              React.createElement('li', null, React.createElement('strong', null, 'BS, Business Administration'), ', Magna Cum Laude'),
+              React.createElement('li', null, 'Certificate in Financial Management, Johns Hopkins Carey – 2023'),
+              React.createElement('li', null, 'SAFe Program Consultant (4.0) – 2015'),
+              React.createElement('li', null, 'PMI‑ACP Agile Certified Practitioner – 2014'),
+              React.createElement('li', null, 'Certified ScrumMaster – 2008')
+            )
+          ),
+          /* Skills section */
+          React.createElement('section', { className: 'section', id: 'skills' },
+            React.createElement('h2', null, 'Technical Skills'),
+            React.createElement('ul', null,
+              React.createElement('li', null, React.createElement('strong', null, 'Languages:'), ' C#, SQL/NoSQL, C/C++, Python, Swift, Java, TypeScript/JavaScript, R'),
+              React.createElement('li', null, React.createElement('strong', null, 'Frameworks:'), ' .NET/.NET Core, Angular/Node.js, Vue.js, Xamarin, Kendo, Messaging & Mapping APIs'),
+              React.createElement('li', null, React.createElement('strong', null, 'Platforms:'), ' Windows, Linux, macOS, Azure, AWS'),
+              React.createElement('li', null, React.createElement('strong', null, 'Tools:'), ' Git, Jira, Slack, CI/CD pipelines, SAFe/Agile practices')
+            )
+          ),
+          /* Contact section */
+          React.createElement('section', { className: 'section', id: 'contact' },
+            React.createElement('h2', null, 'Contact'),
+            React.createElement('p', null,
+              'Email: ', React.createElement('a', { href: 'mailto:bookemdano@gmail.com' }, 'bookemdano@gmail.com'), React.createElement('br'),
+              'LinkedIn: ', React.createElement('a', { href: 'https://linkedin.com/danfrancis', target: '_blank' }, 'linkedin.com/danfrancis'), React.createElement('br'),
+              'Location: Monkton, MD'
+            )
+          )
+        )
+      )
+    );
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+  </script>
+</body>
+</html>
