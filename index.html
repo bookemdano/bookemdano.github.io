@@ -105,25 +105,7 @@
 <body>
   <div id="root"></div>
   <script>
-    // Reusable section component with expandable content
-    const Section = ({ title, children }) => {
-      const [open, setOpen] = React.useState(true);
-      return React.createElement(
-        'div',
-        { className: 'section' },
-        [
-          React.createElement(
-            'h2',
-            {
-              onClick: () => setOpen(!open),
-              style: { cursor: 'pointer', userSelect: 'none' }
-            },
-            title + (open ? ' \u25BC' : ' \u25B6')
-          ),
-          open && React.createElement('div', { className: 'section-body' }, children)
-        ]
-      );
-    };
+    // Sections are no longer collapsible, so a reusable Section component is not needed.
 
     // Main application component
     const App = () => (
@@ -142,41 +124,15 @@
           React.createElement('section', { className: 'section', id: 'photo' },
             React.createElement('img', { className: 'photo', src: 'profile.jpeg', alt: 'Dan Francis portrait' })
           ),
-          // About Me
-          React.createElement(Section, { title: 'About Me' }, [
-            React.createElement('p', { key: 'about1' },
+          // About Me (non-collapsible)
+          React.createElement('section', { className: 'section', id: 'about' },
+            React.createElement('h2', null, 'About Me'),
+            React.createElement('p', null,
               'I\u2019m a software engineering leader with over 20 years of experience building and scaling SaaS and enterprise platforms. I have deep expertise in C#, .NET, and multi\u2011tier architecture, with a track record of hands\u2011on development and technical leadership. I\u2019ve scaled systems to 20\u00d7 usage, integrated cloud services (AWS, Azure), and led Agile engineering teams delivering high\u2011impact solutions around the world.'
             )
-          ]),
-          // Interests & Miscellaneous
-          React.createElement(Section, { title: 'Interests & Miscellaneous' }, [
-            React.createElement('p', { key: 'interests1' },
-              'Beyond technology, I\u2019m an avid learner and problem solver. I read more than 100 books every year, run marathons, have memorized 168 digits of \u03c0, enjoy juggling, and speak intermediate French.'
-            ),
-            React.createElement('table', { key: 'table' }, [
-              React.createElement('thead', { key: 'thead' },
-                React.createElement('tr', null, [
-                  React.createElement('th', { key: 'hcat' }, 'Category'),
-                  React.createElement('th', { key: 'hnum', style: { textAlign: 'right' } }, 'Number of items')
-                ])
-              ),
-              React.createElement('tbody', { key: 'tbody' }, [
-                ['Languages', '20'],
-                ['Frameworks', '8'],
-                ['Platforms', '8'],
-                ['Technologies & Tools', '9'],
-                ['Methodologies & Leadership', '5'],
-                ['Personal Hobbies', '5']
-              ].map(([cat, count], idx) =>
-                React.createElement('tr', { key: idx }, [
-                  React.createElement('td', { key: 'cat' + idx }, cat),
-                  React.createElement('td', { key: 'num' + idx, style: { textAlign: 'right' } }, count)
-                ])
-              ))
-            ])
-          ]),
-          // Professional Experience
-          React.createElement(Section, { title: 'Professional Experience' }, [
+          ),
+          // Professional Experience (non-collapsible)
+          React.createElement('section', { className: 'section', id: 'experience' }, [
             React.createElement('ul', { key: 'experience-list' }, [
               React.createElement('li', { key: 'exp1' }, [
                 React.createElement('strong', null, 'Johns Hopkins University — Engineering Manager'), React.createElement('br'),
@@ -204,8 +160,8 @@
               ])
             ])
           ]),
-          // Education & Certifications
-          React.createElement(Section, { title: 'Education & Certifications' }, [
+          // Education & Certifications (non-collapsible)
+          React.createElement('section', { className: 'section', id: 'education' }, [
             React.createElement('ul', { key: 'education-list' }, [
               React.createElement('li', { key: 'edu1' }, [React.createElement('strong', null, 'MS, Software Engineering'), ', WVU, 2023 – 4.0 GPA']),
               React.createElement('li', { key: 'edu2' }, [React.createElement('strong', null, 'BS, Business Administration'), ', 3.7 GPA Magna Cum Laude']),
@@ -216,8 +172,8 @@
               React.createElement('li', { key: 'edu7' }, 'Certified ScrumMaster – 2008')
             ])
           ]),
-          // Technical Skills
-          React.createElement(Section, { title: 'Technical Skills' }, [
+          // Technical Skills (non-collapsible)
+          React.createElement('section', { className: 'section', id: 'skills' }, [
             React.createElement('ul', { key: 'skills-list' }, [
               React.createElement('li', { key: 'skill1' }, [
                 React.createElement('strong', null, 'Languages:'),
@@ -241,12 +197,20 @@
               ]),
               React.createElement('li', { key: 'skill6' }, [
                 React.createElement('strong', null, 'AI Frameworks & Tools:'),
-                ' GitHub Copilot CLI, Copilot Chat, Copilot for Microsoft 365, Azure OpenAI Service'
+                ' LangChain, LlamaIndex, Haystack, Flowise, FAISS, Milvus, Weaviate, Chroma, Hugging Face Transformers, Open‑Assistant, Axolotl, LoRA/PEFT'
+              ]),
+              React.createElement('li', { key: 'skill7' }, [
+                React.createElement('strong', null, 'Microsoft AI & Copilot:'),
+                ' GitHub Copilot CLI, Copilot Chat, Copilot for Microsoft 365, Copilot Studio, Azure OpenAI Service, Semantic Kernel, Power Platform AI Builder, Bot Framework'
+              ]),
+              React.createElement('li', { key: 'skill8' }, [
+                React.createElement('strong', null, 'AI Code Assistants:'),
+                ' GitHub Copilot, Amazon CodeWhisperer, Tabnine, Replit Ghostwriter, Codeium, Sourcegraph Cody, Code Llama, StarCoder, Tabby, Cursor, Aider, Continue, Smol Developer, OpenDevin'
               ])
             ])
           ]),
-          // Contact
-          React.createElement(Section, { title: 'Contact' }, [
+          // Contact (non-collapsible)
+          React.createElement('section', { className: 'section', id: 'contact' }, [
             React.createElement('p', { key: 'contact1' }, [
               'Email: ', React.createElement('a', { href: 'mailto:bookemdano@gmail.com' }, 'bookemdano@gmail.com'), React.createElement('br'),
               'LinkedIn: ', React.createElement('a', { href: 'https://www.linkedin.com/in/danfrancis', target: '_blank' }, 'linkedin.com/danfrancis'), React.createElement('br'),
