@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dan Francis - Software Engineering Leader</title>
+  <!-- Site icon -->
+  <link rel="icon" type="image/png" href="favicon.png">
   <!-- React via CDN -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -52,7 +54,7 @@
       font-size: 1.8em;
       color: #222;
     }
-    /* Photo placeholder */
+    /* Photo */
     .photo {
       width: 150px;
       height: 150px;
@@ -62,13 +64,21 @@
       margin: 0 auto 20px auto;
       background-color: #ccc;
     }
-    /* Lists styling */
-    ul {
-      margin-top: 0;
-      padding-left: 20px;
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
     }
-    li {
-      margin-bottom: 10px;
+    th, td {
+      padding: 4px;
+    }
+    th {
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    td {
+      border-bottom: 1px solid #f0f0f0;
     }
     /* Links */
     a {
@@ -95,112 +105,166 @@
 <body>
   <div id="root"></div>
   <script>
+    // Reusable section component with expandable content
+    const Section = ({ title, children }) => {
+      const [open, setOpen] = React.useState(true);
+      return React.createElement(
+        'div',
+        { className: 'section' },
+        [
+          React.createElement(
+            'h2',
+            {
+              onClick: () => setOpen(!open),
+              style: { cursor: 'pointer', userSelect: 'none' }
+            },
+            title + (open ? ' \u25BC' : ' \u25B6')
+          ),
+          open && React.createElement('div', { className: 'section-body' }, children)
+        ]
+      );
+    };
+
+    // Main application component
     const App = () => (
       React.createElement(React.Fragment, null,
+        // Header
         React.createElement('header', { className: 'header' },
-          React.createElement('h1', null, 'Dan Francis'),
+          React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+            React.createElement('img', { src: 'favicon.png', alt: 'Icon', style: { height: '40px', width: '40px', borderRadius: '20px', marginRight: '10px' } }),
+            React.createElement('h1', null, 'Dan Francis')
+          ),
           React.createElement('p', null, 'Software Engineering Leader — C#, .NET, Cloud & Agile Specialist')
         ),
+        // Main content
         React.createElement('main', { className: 'content' },
-          /* Photo section */
+          // Photo (non-collapsible)
           React.createElement('section', { className: 'section', id: 'photo' },
             React.createElement('img', { className: 'photo', src: 'profile.jpeg', alt: 'Dan Francis portrait' })
           ),
-          /* About section */
-          React.createElement('section', { className: 'section', id: 'about' },
-            React.createElement('h2', null, 'About Me'),
-            React.createElement('p', null,
-              'I’m a software engineering leader with over 20 years of experience building and scaling SaaS and enterprise platforms. ' +
-              'I have deep expertise in C#, .NET, and multi‑tier architecture, with a track record of hands‑on development and technical leadership. ' +
-              'I’ve scaled systems to 20× usage, integrated cloud services (AWS, Azure), and led Agile engineering teams delivering high‑impact solutions around the world.'
+          // About Me
+          React.createElement(Section, { title: 'About Me' }, [
+            React.createElement('p', { key: 'about1' },
+              'I\u2019m a software engineering leader with over 20 years of experience building and scaling SaaS and enterprise platforms. I have deep expertise in C#, .NET, and multi\u2011tier architecture, with a track record of hands\u2011on development and technical leadership. I\u2019ve scaled systems to 20\u00d7 usage, integrated cloud services (AWS, Azure), and led Agile engineering teams delivering high\u2011impact solutions around the world.'
             )
-          ),
-          /* Experience section */
-          React.createElement('section', { className: 'section', id: 'experience' },
-            React.createElement('h2', null, 'Professional Experience'),
-            React.createElement('ul', null,
-              React.createElement('li', null,
+          ]),
+          // Interests & Miscellaneous
+          React.createElement(Section, { title: 'Interests & Miscellaneous' }, [
+            React.createElement('p', { key: 'interests1' },
+              'Beyond technology, I\u2019m an avid learner and problem solver. I read more than 100 books every year, run marathons, have memorized 168 digits of \u03c0, enjoy juggling, and speak intermediate French.'
+            ),
+            React.createElement('table', { key: 'table' }, [
+              React.createElement('thead', { key: 'thead' },
+                React.createElement('tr', null, [
+                  React.createElement('th', { key: 'hcat' }, 'Category'),
+                  React.createElement('th', { key: 'hnum', style: { textAlign: 'right' } }, 'Number of items')
+                ])
+              ),
+              React.createElement('tbody', { key: 'tbody' }, [
+                ['Languages', '20'],
+                ['Frameworks', '8'],
+                ['Platforms', '8'],
+                ['Technologies & Tools', '9'],
+                ['Methodologies & Leadership', '5'],
+                ['Personal Hobbies', '5']
+              ].map(([cat, count], idx) =>
+                React.createElement('tr', { key: idx }, [
+                  React.createElement('td', { key: 'cat' + idx }, cat),
+                  React.createElement('td', { key: 'num' + idx, style: { textAlign: 'right' } }, count)
+                ])
+              ))
+            ])
+          ]),
+          // Professional Experience
+          React.createElement(Section, { title: 'Professional Experience' }, [
+            React.createElement('ul', { key: 'experience-list' }, [
+              React.createElement('li', { key: 'exp1' }, [
                 React.createElement('strong', null, 'Johns Hopkins University — Engineering Manager'), React.createElement('br'),
                 React.createElement('em', null, 'March 2022 – present'), React.createElement('br'),
                 'Lead delivery of scalable SaaS and enterprise solutions, integrating AWS and Azure services and managing high-performing Agile teams.'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'exp2' }, [
                 React.createElement('strong', null, 'DevFirst.net — Full-Stack Developer'), React.createElement('br'),
                 React.createElement('em', null, 'Apr 2021 – Mar 2022'), React.createElement('br'),
                 'Developed web tools using React and .NET for clients including Johns Hopkins Health Care and advised on processes and operations.'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'exp3' }, [
                 React.createElement('strong', null, 'SchoolPass — VP of Engineering/Product & Development'), React.createElement('br'),
                 React.createElement('em', null, 'Jan 2018 – Apr 2021'), React.createElement('br'),
                 'Oversaw technology for dismissal, visitor management and wellness software, leading contractors and internal teams to grow product usage.'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'exp4' }, [
                 React.createElement('strong', null, 'Omnitracs / Roadnet / UPS Logistics — Various Leadership Roles'), React.createElement('br'),
                 React.createElement('em', null, 'Nov 1999 – Jan 2018'), React.createElement('br'),
                 'Led mobile software teams, trained developers on SAFe and Agile practices, modernized applications and collaborated across locations.'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'exp5' }, [
                 React.createElement('strong', null, 'Additional Experience'), React.createElement('br'),
                 'Technical editor for software development publications and software lead for inflight duty-free sales systems.'
-              )
-            )
-          ),
-          /* Education & Certifications */
-          React.createElement('section', { className: 'section', id: 'education' },
-            React.createElement('h2', null, 'Education & Certifications'),
-            React.createElement('ul', null,
-              React.createElement('li', null, React.createElement('strong', null, 'MS, Software Engineering'), ', WVU, 2023 – 4.0 GPA'),
-              React.createElement('li', null, React.createElement('strong', null, 'BS, Business Administration'), ', 3.7 GPA Magna Cum Laude'),
-              React.createElement('li', null, 'Leveraging AI Johns Hopkins, Johns Hopkins Carey – 2025'),
-              React.createElement('li', null, 'Certificate in Financial Management, Johns Hopkins Carey – 2023'),
-              React.createElement('li', null, 'SAFe Program Consultant (4.0) – 2015'),
-              React.createElement('li', null, 'PMI‑ACP Agile Certified Practitioner – 2014'),
-              React.createElement('li', null, 'Certified ScrumMaster – 2008')
-            )
-          ),
-          /* Skills section */
-          React.createElement('section', { className: 'section', id: 'skills' },
-            React.createElement('h2', null, 'Technical Skills'),
-            React.createElement('ul', null,
-              // Expanded details from the second page of the résumé
-              React.createElement('li', null,
+              ])
+            ])
+          ]),
+          // Education & Certifications
+          React.createElement(Section, { title: 'Education & Certifications' }, [
+            React.createElement('ul', { key: 'education-list' }, [
+              React.createElement('li', { key: 'edu1' }, [React.createElement('strong', null, 'MS, Software Engineering'), ', WVU, 2023 – 4.0 GPA']),
+              React.createElement('li', { key: 'edu2' }, [React.createElement('strong', null, 'BS, Business Administration'), ', 3.7 GPA Magna Cum Laude']),
+              React.createElement('li', { key: 'edu3' }, 'Leveraging AI Johns Hopkins, Johns Hopkins Carey – 2025'),
+              React.createElement('li', { key: 'edu4' }, 'Certificate in Financial Management, Johns Hopkins Carey – 2023'),
+              React.createElement('li', { key: 'edu5' }, 'SAFe Program Consultant (4.0) – 2015'),
+              React.createElement('li', { key: 'edu6' }, 'PMI‑ACP Agile Certified Practitioner – 2014'),
+              React.createElement('li', { key: 'edu7' }, 'Certified ScrumMaster – 2008')
+            ])
+          ]),
+          // Technical Skills
+          React.createElement(Section, { title: 'Technical Skills' }, [
+            React.createElement('ul', { key: 'skills-list' }, [
+              React.createElement('li', { key: 'skill1' }, [
                 React.createElement('strong', null, 'Languages:'),
                 ' C#, SQL (MSSQL, Oracle, MySQL), NoSQL/MongoDB, Python, Swift, Java, C/C++, TypeScript/JavaScript, R, F#, Fortran, VB/VBA, regex, PHP, Perl, Ruby, Pascal, Objective‑C, Razor, Rust'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'skill2' }, [
                 React.createElement('strong', null, 'Frameworks:'),
                 ' .NET/.NET Core (LINQ, Entity Framework, WPF, WCF, ASP.NET), Angular/Node.js, Vue.js, Xamarin, Kendo, Messaging (Mail & SMS), Mapping APIs (Here, TomTom), OpenALPR'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'skill3' }, [
                 React.createElement('strong', null, 'Platforms:'),
                 ' Windows Desktop/Server, macOS, Linux, AWS (EC2, S3, RDS, IAM and more), Azure (DevOps/TFS, Azure SQL, Functions, Cosmos DB), Android, iOS, Embedded Devices, HoloLens'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'skill4' }, [
                 React.createElement('strong', null, 'Technologies & Tools:'),
                 ' REST APIs, Client/Server architectures, DevOps (CI/CD pipelines), Source Control (Git & proprietary), GPS, Terminal (PowerShell, Bash), Data Analysis (Udacity), Jira, Slack'
-              ),
-              React.createElement('li', null,
+              ]),
+              React.createElement('li', { key: 'skill5' }, [
                 React.createElement('strong', null, 'Methodologies & Leadership:'),
                 ' Scrum/Agile (Certified ScrumMaster), SAFe Program Consultant, PMI‑ACP certified project management, team/group leadership (2–50 members) and multi‑team initiatives'
-              ),
-              React.createElement('li', null,
-                React.createElement('strong', null, 'AI & ML:'),
-                ' OpenAI, Claude, Azure OpenAI, TensorFlow, computer vision, Gradio, CoPilot CLI'
-              )
-            )
-          ),
-          /* Contact section */
-          React.createElement('section', { className: 'section', id: 'contact' },
-            React.createElement('h2', null, 'Contact'),
-            React.createElement('p', null,
+              ]),
+              React.createElement('li', { key: 'skill6' }, [
+                React.createElement('strong', null, 'AI Frameworks & Tools:'),
+                ' LangChain, LlamaIndex, Haystack, Flowise, FAISS, Milvus, Weaviate, Chroma, Hugging Face Transformers, Open‑Assistant, Axolotl, LoRA/PEFT'
+              ]),
+              React.createElement('li', { key: 'skill7' }, [
+                React.createElement('strong', null, 'Microsoft AI & Copilot:'),
+                ' GitHub Copilot CLI, Copilot Chat, Copilot for Microsoft 365, Copilot Studio, Azure OpenAI Service, Semantic Kernel, Power Platform AI Builder, Bot Framework'
+              ]),
+              React.createElement('li', { key: 'skill8' }, [
+                React.createElement('strong', null, 'AI Code Assistants:'),
+                ' GitHub Copilot, Amazon CodeWhisperer, Tabnine, Replit Ghostwriter, Codeium, Sourcegraph Cody, Code Llama, StarCoder, Tabby, Cursor, Aider, Continue, Smol Developer, OpenDevin'
+              ])
+            ])
+          ]),
+          // Contact
+          React.createElement(Section, { title: 'Contact' }, [
+            React.createElement('p', { key: 'contact1' }, [
               'Email: ', React.createElement('a', { href: 'mailto:bookemdano@gmail.com' }, 'bookemdano@gmail.com'), React.createElement('br'),
               'LinkedIn: ', React.createElement('a', { href: 'https://www.linkedin.com/in/danfrancis', target: '_blank' }, 'linkedin.com/danfrancis'), React.createElement('br'),
               'Location: Monkton, MD'
-            )
-          )
+            ])
+          ])
         )
       )
     );
+    // Render the app
     ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
   </script>
 </body>
